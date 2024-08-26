@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar PDF Dinâmico</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.6.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h2>Formulário para Gerar PDF</h2>
+    <form id="pdfForm">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="date">Data:</label>
+        <input type="text" id="date" name="date"><br><br>
+        <button type="button" id="generatePDF">Gerar PDF</button>
+    </form>
+
+    <script>
+        document.getElementById('generatePDF').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Captura os dados do formulário
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
+
+            // Adicionar conteúdo ao PDF
+            doc.text("Relatório Personalizado", 10, 10);
+            doc.text(`Nome: ${name}`, 10, 20);
+            doc.text(`Data: ${date}`, 10, 30);
+
+            // Salvar o PDF
+            doc.save('relatorio_personalizado.pdf');
+        });
+    </script>
+</body>
+</html>
